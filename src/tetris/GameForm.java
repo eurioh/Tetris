@@ -31,7 +31,7 @@ public class GameForm extends JFrame {
         setResizable(false);
 
         gameAreaPlaceholder.setBackground(new java.awt.Color(204, 204, 204));
-        gameAreaPlaceholder.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+        gameAreaPlaceholder.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout gameAreaPlaceholderLayout = new javax.swing.GroupLayout(gameAreaPlaceholder);
         gameAreaPlaceholder.setLayout(gameAreaPlaceholderLayout);

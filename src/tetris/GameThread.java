@@ -15,8 +15,7 @@ public class GameThread extends Thread{
     public void run() {
         
         //main game loop       
-        while(true) {
-            
+        while(true) {            
             ga.spawnBlock();
             ga.moveBlockDown();
             
