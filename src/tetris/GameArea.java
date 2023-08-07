@@ -77,15 +77,15 @@ public class GameArea extends JPanel {
         }
     }
     
-    private void drawBackground(Graphics g) {
-        Color color; 
-        for(int r = 0; r < gridRows; r++) {
-            for(int c = 0; c <gridColumns; c++) {
-                color = background[r][c];
-                
-            }
-        }
-    }
+//    private void drawBackground(Graphics g) {
+//        Color color; 
+//        for(int r = 0; r < gridRows; r++) {
+//            for(int c = 0; c <gridColumns; c++) {
+//                color = background[r][c];
+//                
+//            }
+//        }
+//    }
     
     @Override
     protected void paintComponent(Graphics g) {
@@ -101,7 +101,7 @@ public class GameArea extends JPanel {
             }            
         }
         
-        drawBackground(g);
+        //drawBackground(g);
         drawBlock(g);
     }
 }

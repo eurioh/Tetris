@@ -10,8 +10,10 @@ public class GameForm extends JFrame {
         initComponents();
         
         ga= new GameArea(gameAreaPlaceholder, 10);
+        
         //GameArea object added to the GameForm object
         this.add(ga);
+        
         startGame();
     }
 

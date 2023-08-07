@@ -14,7 +14,8 @@ public class TetrisBlock {
     }
     
     public void spawn(int gridWidth) {
-        y = -1 -getHeight();
+        
+        y = -getHeight();
         x = (gridWidth - getWidth())/2;
     }
     
