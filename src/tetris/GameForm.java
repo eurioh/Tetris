@@ -1,12 +1,16 @@
 package tetris;
 
+import java.awt.event.ActionEvent;
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
 import javax.swing.JFrame;
+import javax.swing.KeyStroke;
 
 public class GameForm extends JFrame {
 
     private GameArea ga;
-    
-    public GameForm() {
+        public GameForm() {
         initComponents();
         
         ga= new GameArea(gameAreaPlaceholder, 10);
@@ -14,8 +18,51 @@ public class GameForm extends JFrame {
         //GameArea object added to the GameForm object
         this.add(ga);
         
+        initControls();
+        
         startGame();
     }
+        
+    //key control
+    private void initControls() {
+     //key bindings - binding input key and action in the game
+     InputMap im = this.getRootPane().getInputMap();
+     ActionMap am = this.getRootPane().getActionMap();
+        
+     im.put(KeyStroke.getKeyStroke("RIGHT"), "right");
+     im.put(KeyStroke.getKeyStroke("LEFT"), "left");
+     im.put(KeyStroke.getKeyStroke("UP"), "up");
+     im.put(KeyStroke.getKeyStroke("DOWN"), "down");
+          
+     //use anonymous class for repetitive use of abstrac class
+     am.put("right", new AbstractAction(){
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            ga.moveBlockRight();
+         }
+     });
+     am.put("left", new AbstractAction(){
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            ga.moveBlockLeft();
+         }
+     });
+     am.put("up", new AbstractAction(){
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            ga.rotateBlock();
+         }
+     });
+     am.put("down", new AbstractAction(){
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            ga.dropBlock();
+         }
+     });
+     
+    }
+    
+
 
     public void startGame() {
         new GameThread(ga).start();
