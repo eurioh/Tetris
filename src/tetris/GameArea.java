@@ -33,14 +33,22 @@ public class GameArea extends JPanel {
     }
     
     public void spawnBlock() {
-        block = new TetrisBlock(new int[][]{ {1, 0}, {1, 0}, {1,1}}, Color.blue); 
+        block = new TetrisBlock(new int[][]{ {1, 0}, {1, 0}, {1,1}}); 
         block.spawn(gridColumns);
     }
 
+    public boolean isBlockOutofBounds() {
+        if(block.getY() < 0) {
+            return true;
+        }
+        return false;
+    }
+    
     //stop the block when reach bottom
     public boolean moveBlockDown() {
         if(checkBottom() == false){
             moveBlockToBackground();
+            clearLines();
             return false;
         } 
         
@@ -144,6 +152,42 @@ public class GameArea extends JPanel {
     public void rotateBlock() {
         block.rotate();
         repaint();
+    }
+    public void clearLines() {
+        
+        boolean lineFilled;
+        
+        for(int r = gridRows -1; r >= 0; r--) {
+            lineFilled = true;
+            
+            for (int c = 0; c < gridColumns; c++) {
+               if(background[r][c] == null) { 
+                   lineFilled = false;
+                   break; 
+               } 
+            }
+            if(lineFilled) {
+                clearLine(r);
+                shiftDown(r);
+                clearLine(0);
+                r++;
+                repaint();                
+            }
+        }
+    }
+    
+    private void clearLine(int r) {
+        for(int i =0; i < gridColumns; i++) {
+            background[r][i] = null;
+        }          
+    }
+    
+    private void shiftDown(int r) {
+        for (int row = r; row > 0; row--) {
+            for(int col = 0; col < gridColumns; col++) {
+                background[row][col] = background[row-1][col];
+            }
+        }
     }
     
     private void moveBlockToBackground() {
