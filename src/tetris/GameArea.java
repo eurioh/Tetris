@@ -41,6 +41,7 @@ public class GameArea extends JPanel {
     public boolean moveBlockDown() {
         if(checkBottom() == false){
             moveBlockToBackground();
+            clearLines();
             return false;
         } 
         
@@ -144,6 +145,42 @@ public class GameArea extends JPanel {
     public void rotateBlock() {
         block.rotate();
         repaint();
+    }
+    
+    public void clearLines() {
+        boolean lineFilled;
+        
+        for (int r = gridRows-1; r >= 0 ; r--) {
+            lineFilled = true;
+            for (int c = 0; c < gridColumns; c++) {
+                if(background[r][c] == null) {
+                    lineFilled = false;
+                    break;
+                }                
+            }  
+            if(lineFilled) {
+                clearLine(r);
+                shiftDown(r);
+                clearLine(0);
+                r++;
+                repaint();
+            }
+        }
+    }
+    
+    public void clearLine(int r) {
+        for (int i = 0; i < gridColumns; i++) {
+                    background[r][i] = null;
+                }
+    }
+    
+    public void shiftDown(int r) {
+        for(int row = r; row > 0; row--) {
+            for(int col = 0; col < gridColumns; col++) {
+                background[row][col] = background[row-1][col];
+            }
+            
+        }
     }
     
     private void moveBlockToBackground() {
